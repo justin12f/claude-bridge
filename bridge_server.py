@@ -1,6 +1,6 @@
 # /// script
 # requires-python = ">=3.10"
-# dependencies = ["mcp>=1.2.0"]
+# dependencies = ["mcp>=2,<3"]
 # ///
 """
 claude-bridge: servidor MCP para comunicacion en "tiempo real" entre dos
@@ -28,7 +28,7 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-from mcp.server.fastmcp import FastMCP
+from mcp.server.mcpserver import MCPServer
 
 REPO = os.environ.get("BRIDGE_REPO", "").strip()
 AUTHOR = os.environ.get("BRIDGE_AUTHOR", "").strip()
@@ -48,7 +48,7 @@ STATE_DIR = Path.home() / ".claude-bridge"
 STATE_DIR.mkdir(exist_ok=True)
 STATE_FILE = STATE_DIR / f"{REPO.replace('/', '__')}__{AUTHOR}.json"
 
-mcp = FastMCP("claude-bridge")
+mcp = MCPServer("claude-bridge")
 
 
 # --------------------------------------------------------------------------- #
